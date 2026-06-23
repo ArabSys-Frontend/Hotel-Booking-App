@@ -1,54 +1,45 @@
-# React + TypeScript + Vite
+**Hotel Booking App**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- **Simple React + Vite frontend** for browsing and managing hotel rooms. Includes a public booking UI and a protected owner dashboard.
 
-Currently, two official plugins are available:
+**Quick Start**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Requirements:** Node 18+ and npm.
+- **Install:** `npm install`
+- **Run (dev):** `npm run dev`
+- **Build:** `npm run build`
+- **Preview:** `npm run preview`
 
-## Expanding the ESLint configuration
+**Login (admin)**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Static admin email: `admin@admin.com` — use it on `/login` to access the owner dashboard.
+- Auth is stored locally in `localStorage` (key: `hotel-booking-auth`). See `src/utils/auth.ts`.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+**Main Routes**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- `/` — Home
+- `/rooms` — All rooms
+- `/rooms/:id` — Room details
+- `/my-bookings` — User bookings
+- `/login` — Admin login (static)
+- `/owner` — Owner dashboard (protected)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Tech & Structure**
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- Framework: React + Vite
+- Styling: Tailwind CSS
+- Key folders:
+	- `src/components` — UI components
+	- `src/pages` — Page views (Home, AllRooms, Owner pages)
+	- `src/utils` — small helpers (auth, constants)
+
+**Notes for maintainers**
+
+- Owner routes are guarded by `RequireAuth` (`src/components/RequireAuth.tsx`).
+- The simple auth implementation is intended for local/demo use only. Replace with a proper auth provider for production.
+- To change the admin email, update `ADMIN_EMAIL` in `src/utils/auth.ts`.
+
+**Contributing**
+
+- Open a PR on the `feature/login` branch or discuss changes via issues. Keep changes focused and small.
+
